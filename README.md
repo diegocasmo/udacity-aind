@@ -1,5 +1,5 @@
 # [Udacity Artificial Intelligence Nanodegree](https://www.udacity.com/course/artificial-intelligence-nanodegree--nd889)
-A repository of my solutions to the required projects to complete the Artificial Intelligence Nanodegree offered by Udacity.
+A repository of multiple projects and labs done in the Udacity Artificial Intelligence Nanodegree (aind).
 
 ### [Sudoku](/sudoku)
 
