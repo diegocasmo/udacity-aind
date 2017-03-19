@@ -12,3 +12,7 @@ In this lesson, you'll build a Game-Playing agent that defeats opponents in Isol
 ### [Lab: Simulated Annealing](/simulated-annealing)
 
 In this exercise you will check your understanding of simulated annealing by implementing the algorithm in a Jupyter notebook and using it to solve the Traveling Salesman Problem (TSP) between US state capitals.
+
+### [Lab: Constraint Satisfaction Problems](/constraint-satisfaction)
+
+In this exercise you will check your understanding of Constraint Satisfaction Problems by solving the N-queens problem using symbolic constraints and backtracking search in a Jupyter notebook.
