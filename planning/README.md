@@ -85,7 +85,7 @@ Goal(At(C1, JFK) ∧ At(C3, JFK) ∧ At(C2, SFO) ∧ At(C4, SFO))
 - [x] `AirCargoProblem.get_actions` method including `load_actions` and `unload_actions` sub-functions
 - [x] `AirCargoProblem.actions` method
 - [x] `AirCargoProblem.result` method
-- [ ] `air_cargo_p2` function
+- [x] `air_cargo_p2` function
 - [ ] `air_cargo_p3` function
 
 #### TODO: Experiment and document metrics for non-heuristic planning solution searches
