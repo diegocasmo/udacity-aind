@@ -86,7 +86,7 @@ Goal(At(C1, JFK) ∧ At(C3, JFK) ∧ At(C2, SFO) ∧ At(C4, SFO))
 - [x] `AirCargoProblem.actions` method
 - [x] `AirCargoProblem.result` method
 - [x] `air_cargo_p2` function
-- [ ] `air_cargo_p3` function
+- [x] `air_cargo_p3` function
 
 #### TODO: Experiment and document metrics for non-heuristic planning solution searches
 * Run uninformed planning searches for `air_cargo_p1`, `air_cargo_p2`, and `air_cargo_p3`; provide metrics on number of node expansions required, number of goal tests, time elapsed, and optimality of solution for each search algorithm. Include the result of at least three of these searches, including breadth-first and depth-first, in your write-up (`breadth_first_search` and `depth_first_graph_search`).
