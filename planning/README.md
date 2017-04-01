@@ -130,8 +130,8 @@ classes, and the search methods in the AIMA library.
 - [x] `PlanningGraph.add_literal_level` method
 - [x] `PlanningGraph.inconsistent_effects_mutex` method
 - [x] `PlanningGraph.interference_mutex` method
-- [ ] `PlanningGraph.competing_needs_mutex` method
-- [ ] `PlanningGraph.negation_mutex` method
+- [x] `PlanningGraph.competing_needs_mutex` method
+- [x] `PlanningGraph.negation_mutex` method
 - [ ] `PlanningGraph.inconsistent_support_mutex` method
 - [ ] `PlanningGraph.h_levelsum` method
 

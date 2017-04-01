@@ -424,9 +424,13 @@ class PlanningGraph():
         :param node_a2: PgNode_a
         :return: bool
         '''
-
-        # TODO test for Competing Needs between nodes
-        return False
+        is_mutex = False
+        for a1_parent in node_a1.parents:
+            for a2_parent in node_a2.parents:
+                if a1_parent.is_mutex(a2_parent):
+                    is_mutex = True
+                    break
+        return is_mutex
 
     def update_s_mutex(self, nodeset: set):
         ''' Determine and update sibling mutual exclusion for S-level nodes
@@ -452,16 +456,15 @@ class PlanningGraph():
         Test a pair of state literals for mutual exclusion, returning True if
         one node is the negation of the other, and False otherwise.
 
-        HINT: Look at the PgNode_s.__eq__ defines the notion of equivalence for
-        literal expression nodes, and the class tracks whether the literal is
-        positive or negative.
-
         :param node_s1: PgNode_s
         :param node_s2: PgNode_s
         :return: bool
         '''
-        # TODO test for negation between nodes
-        return False
+        # Verify both state represent the same symbol
+        is_same_symbol = node_s1.symbol == node_s2.symbol
+        # Verify 1 state is the negation of the other
+        is_negation = node_s1.is_pos != node_s2.is_pos
+        return is_same_symbol and is_negation
 
     def inconsistent_support_mutex(self, node_s1: PgNode_s, node_s2: PgNode_s):
         '''
