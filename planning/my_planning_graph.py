@@ -326,7 +326,7 @@ class PlanningGraph():
         :return:
             adds S nodes to the current level in self.s_levels[level]
         '''
-        previous_a_level = self.a_levels[level] # Previous action level (previous to this level of states)
+        previous_a_level = self.a_levels[level - 1] # Previous action level (previous to this level of states)
         self.s_levels.append(set()) # Initialize this level of states
         for a_node in previous_a_level:
             for effect_node in a_node.effnodes:
@@ -383,34 +383,36 @@ class PlanningGraph():
         Test a pair of actions for inconsistent effects, returning True if
         one action negates an effect of the other, and False otherwise.
 
-        HINT: The Action instance associated with an action node is accessible
-        through the PgNode_a.action attribute. See the Action class
-        documentation for details on accessing the effects and preconditions of
-        an action.
-
         :param node_a1: PgNode_a
         :param node_a2: PgNode_a
         :return: bool
         '''
-        # TODO test for Inconsistent Effects between nodes
-        return False
+        return bool(
+            # Are actions from node 1 negated by actions in node 2?
+            set(node_a1.action.effect_add) & set(node_a2.action.effect_rem) |
+
+            # Are actions from node 2 negated by actions in node 1?
+            set(node_a2.action.effect_add) & set(node_a1.action.effect_rem)
+        )
 
     def interference_mutex(self, node_a1: PgNode_a, node_a2: PgNode_a) -> bool:
         '''
         Test a pair of actions for mutual exclusion, returning True if the
         effect of one action is the negation of a precondition of the other.
 
-        HINT: The Action instance associated with an action node is accessible
-        through the PgNode_a.action attribute. See the Action class
-        documentation for details on accessing the effects and preconditions of
-        an action.
-
         :param node_a1: PgNode_a
         :param node_a2: PgNode_a
         :return: bool
         '''
-        # TODO test for Interference between nodes
-        return False
+        return bool(
+            # Are actions in node 1 the negation of a precondition of node 2?
+            set(node_a1.action.effect_add) & set(node_a2.action.precond_neg) |
+            set(node_a1.action.effect_rem) & set(node_a2.action.precond_pos) |
+
+            # Are actions in node 2 the negation of a precondition of node 1?
+            set(node_a2.action.effect_add) & set(node_a1.action.precond_neg) |
+            set(node_a2.action.effect_rem) & set(node_a1.action.precond_pos)
+        )
 
     def competing_needs_mutex(self, node_a1: PgNode_a, node_a2: PgNode_a) -> bool:
         '''
