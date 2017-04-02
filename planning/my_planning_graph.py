@@ -475,15 +475,15 @@ class PlanningGraph():
         are pairwise mutually exclusive with all of the actions that could
         achieve the second literal node.
 
-        HINT: The PgNode.is_mutex method can be used to test whether two nodes
-        are mutually exclusive.
-
         :param node_s1: PgNode_s
         :param node_s2: PgNode_s
         :return: bool
         '''
-        # TODO test for Inconsistent Support between nodes
-        return False
+        for s1_parent in node_s1.parents:
+            for s2_parent in node_s2.parents:
+                if not s1_parent.is_mutex(s2_parent):
+                    return False
+        return True
 
     def h_levelsum(self) -> int:
         '''The sum of the level costs of the individual goals (admissible if goals independent)
@@ -491,6 +491,11 @@ class PlanningGraph():
         :return: int
         '''
         level_sum = 0
-        # TODO implement
-        # for each goal in the problem, determine the level cost, then add them together
+        goals = self.problem.goal
+        s_levels = self.s_levels
+        for goal in goals:
+            for level, s_nodes in enumerate(s_levels):
+                if PgNode_s(goal, True) in s_nodes:
+                    level_sum += level
+                    break
         return level_sum

@@ -132,8 +132,8 @@ classes, and the search methods in the AIMA library.
 - [x] `PlanningGraph.interference_mutex` method
 - [x] `PlanningGraph.competing_needs_mutex` method
 - [x] `PlanningGraph.negation_mutex` method
-- [ ] `PlanningGraph.inconsistent_support_mutex` method
-- [ ] `PlanningGraph.h_levelsum` method
+- [x] `PlanningGraph.inconsistent_support_mutex` method
+- [x] `PlanningGraph.h_levelsum` method
 
 
 #### TODO: Experiment and document: metrics of A* searches with these heuristics
