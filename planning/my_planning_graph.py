@@ -424,13 +424,11 @@ class PlanningGraph():
         :param node_a2: PgNode_a
         :return: bool
         '''
-        is_mutex = False
         for a1_parent in node_a1.parents:
             for a2_parent in node_a2.parents:
                 if a1_parent.is_mutex(a2_parent):
-                    is_mutex = True
-                    break
-        return is_mutex
+                    return True
+        return False
 
     def update_s_mutex(self, nodeset: set):
         ''' Determine and update sibling mutual exclusion for S-level nodes
@@ -494,8 +492,10 @@ class PlanningGraph():
         goals = self.problem.goal
         s_levels = self.s_levels
         for goal in goals:
-            for level, s_nodes in enumerate(s_levels):
-                if PgNode_s(goal, True) in s_nodes:
+            node = PgNode_s(goal, True)
+            s_levels_list = enumerate(s_levels)
+            for level, s_nodes in s_levels_list:
+                if node in s_nodes:
                     level_sum += level
                     break
         return level_sum
