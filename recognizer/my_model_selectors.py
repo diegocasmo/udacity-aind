@@ -76,7 +76,23 @@ class SelectorBIC(ModelSelector):
         :return: GaussianHMM object
         """
         warnings.filterwarnings("ignore", category=DeprecationWarning)
-        raise NotImplementedError
+        bic_scores = []
+        try:
+            for n in self.n_components:
+                # BIC = −2 log L + p log N
+                # L = is the likelihood of the fitted model
+                # p = is the number of parameters
+                # N = is the number of data points
+                model = self.base_model(n)
+                log_l = model.score(self.X, self.lengths)
+                p = n ** 2 + 2 * n * model.n_features - 1
+                bic_score = -2 * log_l + p * math.log(n)
+                bic_scores.append(bic_score)
+        except Exception as e:
+            pass
+
+        states = self.n_components[np.argmax(bic_scores)] if bic_scores else self.n_constant
+        return self.base_model(states)
 
 class SelectorDIC(ModelSelector):
     ''' select best model based on Discriminative Information Criterion
