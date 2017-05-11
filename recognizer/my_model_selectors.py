@@ -105,7 +105,23 @@ class SelectorDIC(ModelSelector):
 
     def select(self):
         warnings.filterwarnings("ignore", category=DeprecationWarning)
-        raise NotImplementedError
+        dic_scores = []
+        logs_l = []
+        try:
+            for n_component in self.n_components:
+                model = self.base_model(n_component)
+                logs_l.append(model.score(self.X, self.lengths))
+            sum_logs_l = sum(logs_l)
+            m = len(self.n_components)
+            for log_l in logs_l:
+                # DIC = log(P(X(i)) - 1/(M-1)SUM(log(P(X(all but i))
+                other_words_likelihood = (sum_logs_l - log_l) / (m - 1)
+                dic_scores.append(log_l - other_words_likelihood)
+        except Exception as e:
+            pass
+
+        states = self.n_components[np.argmax(dic_scores)] if dic_scores else self.n_constant
+        return self.base_model(states)
 
 class SelectorCV(ModelSelector):
     ''' select best model based on average log Likelihood of cross-validation folds'''
